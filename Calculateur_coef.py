@@ -2,22 +2,29 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 # Configuration de la page mobile
-st.set_page_config(page_title="Calculateur Coef", page_icon="🧮", layout="centered")
+st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", layout="centered")
 
 st.title("🧮 Calculateur de Coefficient")
 
 # 1. Tes zones de saisie numériques
-# (Modifie les labels "Prix d'achat" etc. si tu veux d'autres textes)
-valeur_1 = st.number_input("Première valeur (ex: Prix d'achat)", value=0.0, step=0.1, format="%.2f")
-valeur_2 = st.number_input("Deuxième valeur (ex: Coefficient)", value=0.0, step=0.1, format="%.2f")
+prix_achat = st.number_input("Prix d'achat HT (€)", value=0.0, step=0.1, format="%.2f")
+coefficient = st.number_input("Coefficient", value=0.0, step=0.1, format="%.2f")
+ecotaxe = st.number_input("Écotaxe (€)", value=0.0, step=0.01, format="%.2f")
 
 st.write("---")
 
-# 2. Le calcul (Exemple de multiplication, à adapter selon ta formule)
-# Si tu as besoin d'une division ou autre, change le signe * ci-dessous
+# 2. Le calcul complet
 try:
-    resultat = valeur_1 * valeur_2
-    st.metric(label="Résultat du calcul", value=f"{resultat:.2f}")
+    # Formule classique : (Prix d'achat * Coefficient) + Écotaxe
+    # N'hésite pas à me dire s'il faut appliquer le coefficient différemment !
+    base_prix = prix_achat * coefficient
+    resultat_final = base_prix + ecotaxe
+    
+    st.metric(label="Prix de vente Final (€)", value=f"{resultat_final:.2f}")
+    
+    if ecotaxe > 0:
+        st.caption(f"Dont {ecotaxe:.2f}€ d'écotaxe incluse.")
+        
 except Exception as e:
     st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
 
@@ -35,7 +42,6 @@ components.html(
             }
         });
     }
-    // S'exécute immédiatement et boucle légèrement pour contrer le rechargement de Streamlit
     forceNumericKeyboard();
     setInterval(forceNumericKeyboard, 1000);
     </script>
