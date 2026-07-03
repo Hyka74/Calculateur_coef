@@ -7,8 +7,8 @@ st.title("Calcul Tarifs fournisseurs📊")
 
 # 1. Zone de saisie des données principales
 # st.number_input bloque automatiquement les lettres et gère les nombres à virgule
-coef = st.number_input("Entrez le Coefficient :", value=0, step=0.1, format="%.2f")
-tarif = st.number_input("Tarif HT / TTC (€) :", value=0, step=1.0, format="%.2f")
+coef = st.number_input("Entrez le Coefficient :", value=.0, step=0.1, format="%.2f")
+tarif = st.number_input("Tarif HT / TTC (€) :", value=.0, step=1.0, format="%.2f")
 
 # 2. Gestion de l'Écotaxe avec le Switch (st.checkbox fait office de switch/interrupteur)
 etat_switch = st.checkbox("Activer l'Écotaxe")
