@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 # Config de la page mobile
 st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", layout="centered")
 
-st.title("🧮 Calcul Tarif + écotaxe")
+st.title("📱 Calcul Tarif + écotaxe")
 
 # 1. Zones de saisie
 prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value=0.0, step=0.1, format="%.2f")
