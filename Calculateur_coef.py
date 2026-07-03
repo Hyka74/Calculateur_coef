@@ -1,35 +1,34 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# Configuration de la page mobile
+# Config de la page mobile
 st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", layout="centered")
 
-st.title("🧮 Calculateur de Coefficient Prix")
+st.title("🧮 Calcul Tarif + écotaxe")
 
-# 1. Tes zones de saisie numériques
+# 1. Zones de saisie
 prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value=0.0, step=0.1, format="%.2f")
-coefficient = st.number_input("Coefficient", value=0.0, step=0.1, format="%.2f")
+coefficient = st.number_input("Coeff", value=0.0, step=0.1, format="%.2f")
 ecotaxe = st.number_input("Écotaxe HT (€)", value=0.0, step=0.01, format="%.2f")
 
 st.write("---")
 
-# 2. Le calcul complet
+# 2. calcul complet
 try:
     # Formule classique : (Prix d'achat * Coefficient) + Écotaxe
-    # N'hésite pas à me dire s'il faut appliquer le coefficient différemment !
     base_prix = prix_achat * coefficient
     resultat_final = base_prix + ecotaxe
     
-    st.metric(label="Prix de vente Final (€)", value=f"{resultat_final:.2f}")
+    st.metric(label="Tarif final TTC (€)", value=f"{resultat_final:.2f}")
     
     if ecotaxe > 0:
-        st.caption(f"Dont {ecotaxe:.2f}€ d'écotaxe incluse.")
+        st.caption(f"Ecotaxe {ecotaxe:.2f}€ TTC.")
         
 except Exception as e:
     st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
 
 # ==============================================================================
-# ASTUCE INVISIBLE : Force le pavé numérique avec virgule sur iPhone et Android
+# Gestion du clavier téléphone
 # ==============================================================================
 components.html(
     """
