@@ -4,12 +4,12 @@ import streamlit.components.v1 as components
 # Configuration de la page mobile
 st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", layout="centered")
 
-st.title("🧮 Calculateur de Coefficient")
+st.title("🧮 Calculateur de Coefficient Prix")
 
 # 1. Tes zones de saisie numériques
-prix_achat = st.number_input("Prix d'achat HT (€)", value=0.0, step=0.1, format="%.2f")
+prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value=0.0, step=0.1, format="%.2f")
 coefficient = st.number_input("Coefficient", value=0.0, step=0.1, format="%.2f")
-ecotaxe = st.number_input("Écotaxe (€)", value=0.0, step=0.01, format="%.2f")
+ecotaxe = st.number_input("Écotaxe HT (€)", value=0.0, step=0.01, format="%.2f")
 
 st.write("---")
 
