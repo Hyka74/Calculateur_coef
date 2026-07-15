@@ -22,7 +22,7 @@ try:
     st.metric(label="Tarif final TTC (€)", value=f"{resultat_final:.2f}")
     
     if ecotaxe > 0:
-        st.caption(f"Ecotaxe {ecotaxe: .2f * 1.2}€ TTC.")
+        st.caption(f"Ecotaxe {ecotaxe * 1.2, format="%.2f}€ TTC.")
         
 except Exception as e:
     st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
