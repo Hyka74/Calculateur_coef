@@ -17,6 +17,7 @@ st.write("---")
 try:
     # Formule classique : (Prix d'achat * Coefficient) + Écotaxe
     base_prix = prix_achat * coefficient
+    ecotaxe * 1.2
     resultat_final = base_prix + ecotaxe
     
     st.metric(label="Tarif final TTC (€)", value=f"{resultat_final:.2f}")
