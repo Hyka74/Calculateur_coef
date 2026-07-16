@@ -7,9 +7,9 @@ st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", l
 st.title("📝 Calcul Tarif + écotaxe")
 
 # 1. Zones de saisie
-prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value=None, placeholder="Entrez un prix", format="%.2f")
-coefficient = st.number_input("Coeff", value=None, placeholder="Entrez un Coeff", format="%.2f")
-ecotaxe = st.number_input("Écotaxe HT (€)", value=None, placeholder="Entrez une écotaxe", format="%.2f")
+prix_achat = st.number_input("Prix d'achat HT/TTC (€)", placeholder="Entrez un prix", format="%.2f")
+coefficient = st.number_input("Coeff", placeholder="Entrez un Coeff", format="%.2f")
+ecotaxe = st.number_input("Écotaxe HT (€)", placeholder="Entrez une écotaxe", format="%.2f")
 
 st.write("---")
 
@@ -21,7 +21,7 @@ try:
     
     st.metric(label="Tarif final TTC (€) avec écotaxe inclus", value=f"{resultat_final:.2f}")
     
-    if ecotaxe > None:
+    if ecotaxe > 0:
         st.metric(label="Ecotaxe TTC (€)", value=f"{ecotaxe * 1.2}", format="%.2f")
         
 except Exception as e:
