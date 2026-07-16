@@ -21,7 +21,7 @@ try:
     
     st.metric(label="Tarif final TTC (€) avec écotaxe inclus", value=f"{resultat_final:.2f}")
     
-    if ecotaxe > 0:
+    if ecotaxe > None:
         st.metric(label="Ecotaxe TTC (€)", value=f"{ecotaxe * 1.2}", format="%.2f")
         
 except Exception as e:
