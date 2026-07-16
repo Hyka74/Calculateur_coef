@@ -16,6 +16,8 @@ st.write("---")
 # 2. calcul complet
 try:
     # Formule classique : (Prix d'achat * Coefficient) + Écotaxe
+    prix_achat = st.number_input(0)
+    
     base_prix = prix_achat * coefficient
     resultat_final = base_prix + (ecotaxe * 1.2)
     
