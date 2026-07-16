@@ -7,7 +7,7 @@ st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", l
 st.title("📝 Calcul Tarif + écotaxe")
 
 # 1. Zones de saisie
-prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value= "none", format="%.2f")
+prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value= 0.0, format="%.2f")
 coefficient = st.number_input("Coeff", format="%.2f")
 ecotaxe = st.number_input("Écotaxe HT (€)", format="%.2f")
 
@@ -15,6 +15,7 @@ st.write("---")
 
 # 2. calcul complet
 try:
+    prix_achat = 0
     # Formule classique : (Prix d'achat * Coefficient) + Écotaxe
     base_prix = prix_achat * coefficient
     resultat_final = base_prix + (ecotaxe * 1.2)
