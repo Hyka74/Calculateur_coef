@@ -6,22 +6,53 @@ st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", l
 
 st.title("📝 Calcul Tarif + écotaxe")
 
-# 1. Zones de saisie
-prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value=None, placeholder="Entrez un prix", format="%.2f")
-coefficient = st.number_input("Coeff", value=None, placeholder="Entrez un Coeff", format="%.2f")
-ecotaxe = st.number_input("Écotaxe HT (€)", value=None, placeholder="Entrez une écotaxe", format="%.2f")
+# 1. Initialisation de la mémoire (Session State) pour nos cases
+if "prix_input" not in st.session_state:
+    st.session_state.prix_input = None
+if "coeff_input" not in st.session_state:
+    st.session_state.coeff_input = None
+if "ecotaxe_input" not in st.session_state:
+    st.session_state.ecotaxe_input = None
+
+# Fonction pour tout vider d'un coup
+def vider_champs():
+    st.session_state.prix_input = None
+    st.session_state.coeff_input = None
+    st.session_state.ecotaxe_input = None
+
+# 2. Zones de saisie liées à la mémoire
+prix_achat = st.number_input(
+    "Prix d'achat HT/TTC (€)", 
+    key="prix_input",
+    placeholder="Entrez un prix", 
+    format="%.2f"
+)
+
+coefficient = st.number_input(
+    "Coeff", 
+    key="coeff_input",
+    placeholder="Entrez un Coeff", 
+    format="%.2f"
+)
+
+ecotaxe = st.number_input(
+    "Écotaxe HT (€)", 
+    key="ecotaxe_input",
+    placeholder="Entrez une écotaxe", 
+    format="%.2f"
+)
+
+# 3. Le bouton magique pour tout effacer en 1 clic
+st.button("🧹 Vider toutes les cases", on_click=vider_champs, use_container_width=True)
 
 st.write("---")
 
-# 2. Sécurisation des valeurs vides
-# Si l'écotaxe est vide (None), on la transforme en 0 pour éviter les bugs de calcul
+# 4. Sécurisation des valeurs vides
 valeur_ecotaxe = ecotaxe if ecotaxe is not None else 0.0
 
-# 3. Calcul complet
-# On ne lance le calcul que si l'utilisateur a rempli les deux valeurs obligatoires
+# 5. Calcul complet
 if prix_achat is not None and coefficient is not None:
     try:
-        # Formule classique : (Prix d'achat * Coefficient) + Écotaxe TTC (Écotaxe * 1.2)
         base_prix = prix_achat * coefficient
         resultat_final = base_prix + (valeur_ecotaxe * 1.2)
         
@@ -36,7 +67,6 @@ if prix_achat is not None and coefficient is not None:
     except Exception as e:
         st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
 else:
-    # Message d'attente discret tant que les cases ne sont pas remplies
     st.info("Veuillez saisir un prix d'achat et un coefficient pour afficher le tarif.")
 
 # ==============================================================================
