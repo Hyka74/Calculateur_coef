@@ -24,8 +24,8 @@ try:
     if ecotaxe > 0:
         st.metric(label="Ecotaxe TTC (€)", value=ecotaxe * 1.2, format="%.2f")
         
-#except Exception as e:
-    #st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
+except Exception as e:
+    st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
 
 # ==============================================================================
 # Gestion du clavier téléphone
