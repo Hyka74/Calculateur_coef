@@ -19,7 +19,7 @@ try:
     base_prix = prix_achat * coefficient
     resultat_final = base_prix + (ecotaxe * 1.2)
     
-    st.metric(label="Tarif final TTC (€) avec écotaxe inclus", value=resultat_final %.2)
+    st.metric(label="Tarif final TTC (€) avec écotaxe inclus", value=resultat_final)
     
     if ecotaxe > 0:
         st.metric(label="Ecotaxe TTC (€)", value=ecotaxe * 1.2, format="%.2f")
