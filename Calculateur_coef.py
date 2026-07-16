@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 # Config de la page mobile
-st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="🧮", layout="centered")
+st.set_page_config(page_title="Calculateur Coef & Écotaxe", page_icon="📝", layout="centered")
 
 st.title("📝 Calcul Tarif + écotaxe")
 
