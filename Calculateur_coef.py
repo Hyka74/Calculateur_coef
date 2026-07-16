@@ -8,8 +8,8 @@ st.title("📝 Calcul Tarif + écotaxe")
 
 # 1. Zones de saisie
 prix_achat = st.number_input("Prix d'achat HT/TTC (€)", value=None, placeholder="Entrez un prix", format="%.2f")
-coefficient = st.number_input("Coeff", placeholder="Entrez un Coeff", format="%.2f")
-ecotaxe = st.number_input("Écotaxe HT (€)", placeholder="Entrez une écotaxe", format="%.2f")
+coefficient = st.number_input("Coeff", value=None, placeholder="Entrez un Coeff", format="%.2f")
+ecotaxe = st.number_input("Écotaxe HT (€)", value=None, placeholder="Entrez une écotaxe", format="%.2f")
 
 st.write("---")
 
