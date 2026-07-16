@@ -13,19 +13,31 @@ ecotaxe = st.number_input("Écotaxe HT (€)", value=None, placeholder="Entrez u
 
 st.write("---")
 
-# 2. calcul complet
-try:
-    # Formule classique : (Prix d'achat * Coefficient) + Écotaxe
-    base_prix = prix_achat * coefficient
-    resultat_final = base_prix + (ecotaxe * 1.2)
-    
-    st.metric(label="Tarif final TTC (€) avec écotaxe inclus", value=resultat_final, format="%.2f")
-    
-    if ecotaxe > 0:
-        st.metric(label="Ecotaxe TTC (€)", value=ecotaxe * 1.2, format="%.2f")
+# 2. Sécurisation des valeurs vides
+# Si l'écotaxe est vide (None), on la transforme en 0 pour éviter les bugs de calcul
+valeur_ecotaxe = ecotaxe if ecotaxe is not None else 0.0
+
+# 3. Calcul complet
+# On ne lance le calcul que si l'utilisateur a rempli les deux valeurs obligatoires
+if prix_achat is not None and coefficient is not None:
+    try:
+        # Formule classique : (Prix d'achat * Coefficient) + Écotaxe TTC (Écotaxe * 1.2)
+        base_prix = prix_achat * coefficient
+        resultat_final = base_prix + (valeur_ecotaxe * 1.2)
         
-except Exception as e:
-    st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
+        # Affichage du tarif final
+        st.metric(label="Tarif final TTC (€) avec écotaxe incluse", value=f"{resultat_final:.2f} €")
+        
+        # Affichage de l'écotaxe uniquement si elle est supérieure à 0
+        if valeur_ecotaxe > 0:
+            ecotaxe_ttc = valeur_ecotaxe * 1.2
+            st.metric(label="Écotaxe TTC (€)", value=f"{ecotaxe_ttc:.2f} €")
+            
+    except Exception as e:
+        st.error("Erreur dans le calcul. Vérifie les valeurs saisies.")
+else:
+    # Message d'attente discret tant que les cases ne sont pas remplies
+    st.info("Veuillez saisir un prix d'achat et un coefficient pour afficher le tarif.")
 
 # ==============================================================================
 # Gestion du clavier téléphone
